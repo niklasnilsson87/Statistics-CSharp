@@ -21,8 +21,14 @@ namespace examination_1
             var json = File.ReadAllText("data.json");
             var numbers = JsonConvert.DeserializeObject<int[]>(json);
 
-            Console.WriteLine("Array line : "+ string.Join(",", numbers));
-            Console.WriteLine(numbers);
+            int numbersMax = Statistics.Maximum(numbers);
+            int numbersMin = Statistics.Minimum(numbers);
+            double numbersMean = Statistics.Mean(numbers);
+            double numbersRange = Statistics.Range(numbers);
+            Console.WriteLine(numbersMax);
+            Console.WriteLine(numbersMin);
+            Console.WriteLine($"{numbersMean:f1}");
+            Console.WriteLine(numbersRange);
         }
     }
 }
