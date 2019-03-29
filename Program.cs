@@ -25,10 +25,14 @@ namespace examination_1
             int numbersMin = Statistics.Minimum(numbers);
             double numbersMean = Statistics.Mean(numbers);
             double numbersRange = Statistics.Range(numbers);
+            double numbersMedian = Statistics.Median(numbers);
+            double numbersDeviation = Statistics.StandardDeviation(numbers);
             Console.WriteLine(numbersMax);
             Console.WriteLine(numbersMin);
             Console.WriteLine($"{numbersMean:f1}");
             Console.WriteLine(numbersRange);
+            Console.WriteLine(numbersMedian);
+            Console.WriteLine(numbersDeviation);
         }
     }
 }
