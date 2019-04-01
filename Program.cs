@@ -21,18 +21,24 @@ namespace examination_1
             var json = File.ReadAllText("data.json");
             var numbers = JsonConvert.DeserializeObject<int[]>(json);
 
-            int numbersMax = Statistics.Maximum(numbers);
-            int numbersMin = Statistics.Minimum(numbers);
-            double numbersMean = Statistics.Mean(numbers);
-            double numbersRange = Statistics.Range(numbers);
-            double numbersMedian = Statistics.Median(numbers);
-            double numbersDeviation = Statistics.StandardDeviation(numbers);
-            Console.WriteLine(numbersMax);
-            Console.WriteLine(numbersMin);
-            Console.WriteLine($"{numbersMean:f1}");
-            Console.WriteLine(numbersRange);
-            Console.WriteLine(numbersMedian);
-            Console.WriteLine(numbersDeviation);
+            dynamic result = Statistics.DescriptiveStatistics(numbers);
+
+            Console.WriteLine(result);
+
+            // int numbersMax = Statistics.Maximum(numbers);
+            // int numbersMin = Statistics.Minimum(numbers);
+            // double numbersMean = Statistics.Mean(numbers);
+            // double numbersRange = Statistics.Range(numbers);
+            // double numbersMedian = Statistics.Median(numbers);
+            // double numbersDeviation = Statistics.StandardDeviation(numbers);
+            // int[] numbersMode = Statistics.Mode(numbers);
+            // Console.WriteLine(numbersMax);
+            // Console.WriteLine(numbersMin);
+            // Console.WriteLine($"{numbersMean:f1}");
+            // Console.WriteLine(numbersRange);
+            // Console.WriteLine(numbersMedian);
+            // Console.WriteLine(numbersDeviation);
+            // Console.WriteLine("Modes is : "+ string.Join(", ", numbersMode));
         }
     }
 }
