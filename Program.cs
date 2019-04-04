@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
-
+using System.Linq;
+using System.Dynamic;
+using System.Collections.Generic;
 
 namespace examination_1
 {
@@ -9,36 +11,25 @@ namespace examination_1
     {
         static void Main(string[] args)
         {
-            // int[] numbers;
-            // using (var reader = File.OpenText("data.json"))
-            // {
-            // var serilazier = new JsonSerializer();
-            // numbers = (int[])serilazier.Deserialize(reader, typeof(int[]));
-            // }
+            try 
+            {
 
-            // string temp = string.Join(", ", numbers);
-            // int[] test = Parse(temp);
-            var json = File.ReadAllText("data.json");
-            var numbers = JsonConvert.DeserializeObject<int[]>(json);
+            int[] value1 = {4, 8, 2, 4, 5};
+            int[] value2 = {4, 2, 6, 1, 3, 7, 5, 3, 7};
+            int[] value3 = {5, 1, 1, 1, 3, -2, 2, 5, 7, 4, 5, 16};
 
-            dynamic result = Statistics.DescriptiveStatistics(numbers);
 
-            Console.WriteLine(result);
+            // string json = File.ReadAllText("data.json");
+            // int[] numbers = JsonConvert.DeserializeObject<int[]>(json);
 
-            // int numbersMax = Statistics.Maximum(numbers);
-            // int numbersMin = Statistics.Minimum(numbers);
-            // double numbersMean = Statistics.Mean(numbers);
-            // double numbersRange = Statistics.Range(numbers);
-            // double numbersMedian = Statistics.Median(numbers);
-            // double numbersDeviation = Statistics.StandardDeviation(numbers);
-            // int[] numbersMode = Statistics.Mode(numbers);
-            // Console.WriteLine(numbersMax);
-            // Console.WriteLine(numbersMin);
-            // Console.WriteLine($"{numbersMean:f1}");
-            // Console.WriteLine(numbersRange);
-            // Console.WriteLine(numbersMedian);
-            // Console.WriteLine(numbersDeviation);
-            // Console.WriteLine("Modes is : "+ string.Join(", ", numbersMode));
+            dynamic result = Statistics.DescriptiveStatistics(value1);
+            Console.Write(result);
+
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
     }
 }
