@@ -1,28 +1,27 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
-using System.Linq;
-using System.Dynamic;
-using System.Collections.Generic;
 
 namespace examination_1
 {
+    /// <summary>
+    /// Represents the main place where the program starts the execution.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// The starting point of the application.
+        /// </summary>
+        /// <param name="args">not in use</param>
         static void Main(string[] args)
         {
             try 
             {
 
-            int[] value1 = {4, 8, 2, 4, 5};
-            int[] value2 = {4, 2, 6, 1, 3, 7, 5, 3, 7};
-            int[] value3 = {5, 1, 1, 1, 3, -2, 2, 5, 7, 4, 5, 16};
+            string json = File.ReadAllText("data.json");
+            int[] numbers = JsonConvert.DeserializeObject<int[]>(json);
 
-
-            // string json = File.ReadAllText("data.json");
-            // int[] numbers = JsonConvert.DeserializeObject<int[]>(json);
-
-            dynamic result = Statistics.DescriptiveStatistics(value1);
+            dynamic result = Statistics.DescriptiveStatistics(numbers);
             Console.Write(result);
 
             } catch (Exception ex)

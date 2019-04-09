@@ -6,11 +6,19 @@ using System.Dynamic;
 
 namespace examination_1
 {
-  class Statistics
+  /// <summary>
+  /// Represent the Statistic Class
+  /// </summary>
+  static class Statistics
   {
+    /// <summary>
+    /// Method that presents the counted values.
+    /// </summary>
+    /// <param name="source">Array of integers</param>
+    /// <returns>A dynamic string.</returns>
     public static dynamic DescriptiveStatistics(int[] source)
     {
-      ErrorCheck(source);
+      Error.ErrorCheck(source);
 
       dynamic obj = new {
         Maximum = Statistics.Maximum(source),
@@ -19,44 +27,69 @@ namespace examination_1
         Range = Statistics.Range(source),
         Median = Statistics.Median(source),
         StandardDeviation = Statistics.StandardDeviation(source),
-        Mode = string.Join(" & ", Statistics.Mode(source))
+        Mode = Statistics.Mode(source)
       };
     
       return $"\n Maximum           :  {obj.Maximum}\n Minimum           :  {obj.Minimum}\n Medelvärde        :  {obj.Mean:f1}\n Median            :  {obj.Median}\n "
-      + $"Typvärde          :  {obj.Mode}\n Variationsbredd   :  {obj.Range}\n Standardavikelse  :  {obj.StandardDeviation:f1}\n";
+      + $"Typvärde          :  {string.Join(" & ", obj.Mode)}\n Variationsbredd   :  {obj.Range}\n Standardavikelse  :  {obj.StandardDeviation:f1}\n";
     }
 
+    /// <summary>
+    /// Method returns the max value in the array
+    /// </summary>
+    /// <param name="source">Array of integers</param>
+    /// <returns>The max value in the array</returns>
     static int Maximum(int[] source)
     {
-      ErrorCheck(source);
+      Error.ErrorCheck(source);
 
       return source.Max();
     }
 
+    /// <summary>
+    /// Method returns the minimum value in the array
+    /// </summary>
+    /// <param name="source">Array of integers</param>
+    /// <returns>The minimum value in the array</returns>
     static int Minimum(int[] source)
     {
-      ErrorCheck(source);
+      Error.ErrorCheck(source);
 
       return source.Min();
     }
 
+    /// <summary>
+    /// Method returns the mean value of the array
+    /// </summary>
+    /// <param name="source">Array of integers</param>
+    /// <returns>The mean value in the array</returns>
     static double Mean(int[] source)
     {
-      ErrorCheck(source);
+      Error.ErrorCheck(source);
 
       return (double)source.Sum() / source.Length;
     }
 
+    /// <summary>
+    /// Method returns the Range value in the array
+    /// </summary>
+    /// <param name="source">Array of integers</param>
+    /// <returns>The Range in the array</returns>
     static int Range(int[] source)
     {
-      ErrorCheck(source);
+      Error.ErrorCheck(source);
 
       return Maximum(source) - Minimum(source);
     }
 
+    /// <summary>
+    /// Method calculates the median value of the array
+    /// </summary>
+    /// <param name="source">Array of integers</param>
+    /// <returns>The median value of the array</returns>
     static double Median(int[] source)
     {
-      ErrorCheck(source);
+      Error.ErrorCheck(source);
 
        Array.Sort(source);
 
@@ -66,9 +99,14 @@ namespace examination_1
        return (source.Length % 2 == 0) ? (source[halfLength - 1] + source[halfLength]) / 2 : source[(source.Length - 1) / 2];
     }
 
+    /// <summary>
+    /// Method calculates the StandardDeviations of the array
+    /// </summary>
+    /// <param name="source">Array of integers</param>
+    /// <returns>The standarddeviation of the array</returns>
     static double StandardDeviation(int[] source)
     {
-      ErrorCheck(source);
+      Error.ErrorCheck(source);
 
       double mean = Mean(source);
 
@@ -77,9 +115,14 @@ namespace examination_1
       return Math.Sqrt(result / source.Length);
     }
 
+    /// <summary>
+    /// Method calculates the mode value of the array.
+    /// </summary>
+    /// <param name="source">Array of integers</param>
+    /// <returns>The mode value of the array</returns>
     static int[] Mode(int[] source)
     {
-      ErrorCheck(source);
+      Error.ErrorCheck(source);
 
       int maxNumber = 0;
 
@@ -99,34 +142,19 @@ namespace examination_1
           counts[source[i]] = 1;
         }
 
-      if (counts[source[i]] > maxNumber)
-      {
-      modes.Clear();
-      modes.Add(source[i]);
-      maxNumber = counts[source[i]];
-      } else if (counts[source[i]] == maxNumber)
-      {
-      modes.Add(source[i]);
-      maxNumber = counts[source[i]];
-      }
+        if (counts[source[i]] > maxNumber)
+        {
+          modes.Clear();
+          modes.Add(source[i]);
+          maxNumber = counts[source[i]];
+        } else if (counts[source[i]] == maxNumber)
+        {
+          modes.Add(source[i]);
+          maxNumber = counts[source[i]];
+        }
       }
 
         return modes.ToArray();
-    }
-
-    private static int[] ErrorCheck(int[] source)
-    {
-
-      if (source == null)
-      {
-        throw new ArgumentNullException();
-      }
-      else if (source.Length == 0)
-      {
-        throw new InvalidOperationException("Sequence contains no elements");
-      }
-
-      return source;
     }
   }
 }
